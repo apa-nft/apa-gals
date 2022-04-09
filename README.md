@@ -14,11 +14,11 @@
 
 3. Generate the Merkle tree root and use it in the Apa Gals contract.
 
-   1. Assuming you have a `ts-config.json`, and `tsc` installed, you simply:
-   
-      `tsc`
-      `node gen.js`
-   
+   1. Assuming you have a `ts-config.json`, and `tsc` installed, you simply navigate to the merke folder:
+      ```
+      tsc
+      node gen.js
+      ```
       This will generate and print the Merkle root and the total quantity.
    
    2. Call the set root function from the contract with the root.
