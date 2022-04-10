@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.12;
+pragma solidity 0.8.13;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
@@ -10,7 +10,7 @@ abstract contract IERC721Full is IERC721, IERC721Enumerable, IERC721Metadata {}
 
 
 
-contract Market is Ownable {
+contract APAGalMarket is Ownable {
     IERC721Full nftContract;
 
     uint256 constant TOTAL_NFTS_COUNT = 1000;
@@ -69,6 +69,10 @@ contract Market is Ownable {
 
     function allowEmergencyDelisting() external onlyOwner {
         emergencyDelisting = true;
+    }
+
+    function setNFTAddress(address nft_address) external onlyOwner {
+         nftContract = IERC721Full(nft_address);
     }
 
     function totalListings() external view returns (uint256) {
