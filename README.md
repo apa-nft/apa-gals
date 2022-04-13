@@ -6,23 +6,21 @@
 
    This will write all the holder to a json file called `lucky10000Holders.json`. Keep in mind that the marketplace is excluded and the list will have less than 10000 in the end.
 
-2. Start the listener and run the on chain lottery.
+2. Generate the onchain [seed](https://snowtrace.io/address/0xEB85eC0BCF12319454FCF7a3632Bc601F0b52BD2#events) and read it from the contract events 
 
-   1. `node getLotteryResults.js`
-   2. The lottery contract is deployed at `https://testnet.snowtrace.io/address/0xc2455c6f01250cbbf20231a0d8f0d55dc6804a44#writeContract` and it generates and emits random numbers. 
-   3. This will generate a file called `lotteryWinners.json` which can be directly fed into the Merkle Tree generator.
+3. Generate the `lotteryWinners.json` to feed into the Merkle Tree.
 
-3. Generate the Merkle tree root and use it in the Apa Gals contract.
+4. Generate the Merkle tree root and use it in the Apa Gals contract.
 
-   1. Assuming you have a `ts-config.json`, and `tsc` installed, you simply navigate to the merke folder:
+   1. Assuming you have a `ts-config.json`, and `tsc` installed, you simply navigate to the `merkle` folder:
       ```
       tsc
       node gen.js
       ```
       This will generate and print the Merkle root and the total quantity.
-   
+
    2. Call the set root function from the contract with the root.
-   
+
    3. To generate a proof for testing, you can edit the `genProof.js` (assuming it is already generated with `tsc`) and change the address there. The script will output the proof and the allowance for the given address.
 
 #### Typescript related issues
@@ -40,11 +38,11 @@
 
 ### Contracts
 
-|          |                                            |
-| -------- | ------------------------------------------ |
-| APA Gals | 0xe4c02d70bd59f029c7103713575691a5a5089e03 |
-| Market   | 0xcfb119275d9ba8677b90b5f5a5dd9b22ec9b7c67 |
-| Lottery  | 0xfb1c988566dd6614e7d0c52007946245a0eae9f6 |
+|          |                                                   |
+| -------- | ------------------------------------------------- |
+| APA Gals | 0xe4c02d70bd59f029c7103713575691a5a5089e03 (Fuji) |
+| Market   | 0xcfb119275d9ba8677b90b5f5a5dd9b22ec9b7c67 (Fuji) |
+| Lottery  | 0xEB85eC0BCF12319454FCF7a3632Bc601F0b52BD2        |
 
 
 
