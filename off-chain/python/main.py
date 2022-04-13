@@ -11,6 +11,7 @@ def get_winners(seed: str):
     winner_dict = {}
     holder_list = get_holder_list()
     random_indexes_list = get_random_indices(seed, len(holder_list))
+    print("Total Holder (Marketplace not taken into account): ",len(holder_list))
     for i in random_indexes_list:
         holder_address = holder_list[i]
         if holder_address in winner_dict:
@@ -55,7 +56,7 @@ def get_random_indices(a: str, length):
     return random_indices
 
 
-get_winners("INSERT SEED")
+get_winners("e7d481809581e0b99b16ee526b040f10c26cc778a523af6e9e214129de926c5a")
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

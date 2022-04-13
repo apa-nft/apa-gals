@@ -13,8 +13,6 @@ abstract contract IERC721Full is IERC721, IERC721Enumerable, IERC721Metadata {}
 contract APAGalMarket is Ownable {
     IERC721Full nftContract;
 
-    uint256 constant TOTAL_NFTS_COUNT = 1000;
-
     struct Listing {
         bool active;
         uint256 id;
@@ -155,10 +153,6 @@ contract APAGalMarket is Ownable {
 
     function addListing(uint256 tokenId, uint256 price) external {
         require(isMarketOpen, "Market is closed.");
-        require(
-            tokenId < TOTAL_NFTS_COUNT,
-            "Honorary APAs are not accepted in the marketplace"
-        );
         require(msg.sender == nftContract.ownerOf(tokenId), "Invalid owner");
 
         uint256 id = listings.length;

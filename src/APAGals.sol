@@ -15,7 +15,7 @@ contract APAGals is
 
     uint256 public constant MAX_SUPPLY = 1000;
     uint256 public reserved = 900;
-    uint256 apaGalsMinted = 0;
+    uint256 public apaGalsMinted = 0;
     uint256 public constant MAX_PER_CLAIM = 5;
     uint256 public constant CLAIM_PRICE = 4 ether;
 

@@ -18,17 +18,10 @@ contract APALottery {
             );
     }
 
-    function roll() external {
-        for (uint16 index = 0; index < 900; index++) {     
-            uint rnd = enoughRandom(index) % 10000;
+    function getSeed() external {
+            uint rnd = enoughRandom(42);
             emit winnerId(rnd);
-        }
+        
     }
 
-    function roll(uint _total) external {
-        for (uint16 index = 0; index < _total; index++) {     
-            uint rnd = enoughRandom(index) % 10000;
-            emit winnerId(rnd);
-        }
-    }
 }
