@@ -26,9 +26,9 @@ def get_winners(seed: str):
 def generate_merkle_tree_list(winner_dict: dict):
     winner_list = []
     for holder in winner_dict:
-        temp = {'address': holder, 'value': winner_dict[holder]}
+        temp = {'address': holder, 'totalGiven': winner_dict[holder]}
         winner_list.append(temp)
-    with open('lotteryWinners.json', 'w') as winnerFile:
+    with open('../lotteryWinners.json', 'w') as winnerFile:
         json.dump(winner_list, winnerFile)
     # test
     total = 0
