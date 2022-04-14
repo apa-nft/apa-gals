@@ -14,10 +14,11 @@ contract APAGals is
 {
 
     uint256 public constant MAX_SUPPLY = 1000;
-    uint256 public reserved = 900;
+    uint256 public reserved = 927;
+    uint256 public initiallyReserved;
     uint256 public apaGalsMinted = 0;
     uint256 public constant MAX_PER_CLAIM = 5;
-    uint256 public constant CLAIM_PRICE = 4 ether;
+    uint256 public constant CLAIM_PRICE = 2 ether;
 
     bool public canClaim = false;
     bool public canClaimAirdrop = false;
@@ -104,7 +105,6 @@ contract APAGals is
         unchecked {
             uint256 totalAPAGals = apaGalsMinted + numberOfMints;
             if (
-                numberOfMints > MAX_PER_CLAIM ||
                 totalAPAGals > (MAX_SUPPLY - reserved)
             ) revert MintLimit();
 
@@ -160,7 +160,7 @@ contract APAGals is
     function normalMint(uint256 numberOfMints) external payable {
         require(canClaim);
         if (CLAIM_PRICE * numberOfMints > msg.value) revert InsufficientAmount();
-
+        if (numberOfMints > MAX_PER_CLAIM ) revert MintLimit();
         _handleMint(numberOfMints);
     }
 
@@ -208,6 +208,7 @@ contract APAGals is
     {
         require(apaGalsMinted + _reserved <= MAX_SUPPLY);
         reserved = _reserved;
+        initiallyReserved = _reserved;
         freeMerkleRoot = _root;
     }
 
@@ -272,7 +273,7 @@ contract APAGals is
                         // solhint-disable-next-line
                         block.timestamp,
                         msg.sender,
-                        blockhash(block.number)
+                        blockhash(block.number - 1)
                     )
                 )
             );
