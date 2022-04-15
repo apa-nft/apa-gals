@@ -1,7 +1,7 @@
 cache/
 out/
 off-chain/node_modules
-merkle/Merkle.js
-merkle/gen.js
-merkle/genProof.js
-merkle/merkleGenerator.js
+off-chain/merkle/Merkle.js
+off-chain/merkle/gen.js
+off-chain/merkle/genProof.js
+off-chain/merkle/merkleGenerator.js
