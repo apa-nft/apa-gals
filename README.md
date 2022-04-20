@@ -38,11 +38,11 @@
 
 ### Contracts
 
-|          |                                                   |
-| -------- | ------------------------------------------------- |
-| APA Gals | 0xe4c02d70bd59f029c7103713575691a5a5089e03 (Fuji) |
-| Market   | 0xcfb119275d9ba8677b90b5f5a5dd9b22ec9b7c67 (Fuji) |
-| Lottery  | 0xEB85eC0BCF12319454FCF7a3632Bc601F0b52BD2        |
+|          |                                            |
+| -------- | ------------------------------------------ |
+| APA Gals | 0x7600088fb72941a9139669d7f6cb4e717ec05c87 |
+| Market   | 0x9615fc5890f4585b14aabf433d0f73aacffec348 |
+| Lottery  | 0xEB85eC0BCF12319454FCF7a3632Bc601F0b52BD2 |
 
 
 
