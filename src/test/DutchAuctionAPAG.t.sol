@@ -3,7 +3,7 @@ pragma solidity 0.8.13;
 
 import "ds-test/test.sol";
 import "../APAGals.sol";
-import "../UnclaimedMinter.sol";
+import "../DutchAuctionAPAG.sol";
 
 interface CheatCodes {
     function expectEmit(
@@ -18,12 +18,16 @@ interface CheatCodes {
        function expectRevert() external;
     function expectRevert(bytes calldata) external;
     function expectRevert(bytes4) external;
+        function warp(uint256) external;
+        function skip(uint256 time) external;
+
+
 }
 
 contract MinterTest is DSTest {
     
     APAGals  APAGALS;
-    RemainingMinter MINTER;
+    DutchAuctionAPAG MINTER;
 
     CheatCodes constant cheats = CheatCodes(HEVM_ADDRESS);
     mapping (uint => bool) ids ;
@@ -32,7 +36,7 @@ contract MinterTest is DSTest {
         APAGALS.toggleClaimability();
         APAGALS.toggleAirdropClaimability();
         APAGALS.setFreeMintDetails(955, 0x64a86c4f5c74f7c6b6f0d97092229d08d5cafd090d4075e77541625de1c310c2);
-        MINTER = new RemainingMinter(address(APAGALS));
+        MINTER = new DutchAuctionAPAG(address(APAGALS),10 ether, 2 ether, 1651262400, 8 );
     }
 
     function mint(uint userId, uint budget, uint numberOfMints) internal {
@@ -66,11 +70,14 @@ contract MinterTest is DSTest {
         emit log_address(address(MINTER));
         emit log_named_uint("Minted", APAGALS.freeRedeemed(address(MINTER)));
         address user = cheats.addr(12);
-        cheats.deal(user,  12 ether);
+        cheats.warp(1651262401 + 60 * 122);
+        //cheats.skip(60 * 10);
+
+        cheats.deal(user,  22 ether);
         cheats.prank(user);
-        MINTER.mintAPAGal{value:9 ether}(3, arr, 954);
+        MINTER.mintAPAGal{value:20 ether}(2, arr, 954);
         assertEq(APAGALS.balanceOf(address(MINTER)),0);
-        assertEq(APAGALS.balanceOf(user),3);
+        assertEq(APAGALS.balanceOf(user),2);
         emit log_named_uint("Minted", APAGALS.freeRedeemed(address(MINTER)));
         
     }
