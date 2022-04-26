@@ -23,6 +23,25 @@
 
    3. To generate a proof for testing, you can edit the `genProof.js` (assuming it is already generated with `tsc`) and change the address there. The script will output the proof and the allowance for the given address.
 
+### Phase 2
+
+The remaining 398 APA gals will be distributed in the following way:
+
+* 98 of them the will be airdropped to APA holders with the following rules:-
+
+  * Previous lottery winners are excluded.
+  * No duplicates, everyone gets 1 APA Gal.
+  * The seed onchain seed generation and the random draft is similar to the first lottery round. You can validate by repoducing the same results by running `secondRound.py` yourself.
+
+* 300 of them will be Dutch auctioned, i.e. the price starts high and gradually decreases over the auction duration. You can either wait for the price the drop or buy early to guarantee a minting spot. The legendaries are still out there...
+
+  * Start: 20:00 UTC 29.04.2022
+  * Duration: 80 minutes
+  * Start price: 10 Avax
+  * End price : 2 Avax
+  
+   
+
 #### Typescript related issues
 
 * You have to generate the config file with `tsc --init`if it doesnt exist. If the compilation fails due to some error, you might wanna check the config file and edit it. `"resolveJsonModule": true,` had to be out-commented in our case.
