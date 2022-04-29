@@ -20,27 +20,24 @@ interface APAGAls {
 contract DutchAuctionAPAG is Ownable {
 
     uint public immutable startingPrice;
+    uint public immutable floorPrice;
     uint public immutable discountRate;
     uint public immutable startAt;
     uint public immutable expiresAt;
     uint private constant DURATION = 80 minutes;
     uint private immutable timeBlock;
+    APAGAls public immutable apaGals;
     uint public constant maxMintPerTx = 5;
+    uint public constant totalAPAGalsPhaseTwo = 398;
 
-    uint floorPrice;
-
-    APAGAls apaGals;
-    
     error InsufficientAmount();
     error MaxMintPerTxExceeded();
-    event pricex(uint);
-
 
     constructor(address _nft_address, uint _startingPrice, uint _floorPrice, uint _startTime, uint _steps) {
         apaGals = APAGAls(payable(_nft_address));
-        startingPrice = _startingPrice; // 5 AVAX
+        startingPrice = _startingPrice; 
         discountRate = (_startingPrice - _floorPrice) / _steps;
-        startAt = _startTime; // 1651262400
+        startAt = _startTime; // 1651258800
         expiresAt = _startTime + DURATION;
         timeBlock = DURATION / _steps;
         floorPrice = _floorPrice;
@@ -49,7 +46,6 @@ contract DutchAuctionAPAG is Ownable {
 
     function mintAPAGal(uint numberOfMints, bytes32[] calldata proof, uint totalGiven) external payable {
         uint price = getPrice();
-        emit pricex(price);
         if(numberOfMints > maxMintPerTx) revert MaxMintPerTxExceeded();
         if (price * numberOfMints > msg.value) revert InsufficientAmount();
         apaGals.freeMint(numberOfMints, totalGiven, proof);
@@ -61,7 +57,7 @@ contract DutchAuctionAPAG is Ownable {
 
     function getPrice() public view returns (uint) {
         if(block.timestamp >= expiresAt) { return  floorPrice;}
-        uint timeElapsed = block.timestamp - startAt;
+        uint timeElapsed = block.timestamp - startAt; // revert with underflow if too soon
         uint divison = timeElapsed / timeBlock;
         uint discount = discountRate * divison ;
         return startingPrice - discount;
@@ -69,15 +65,6 @@ contract DutchAuctionAPAG is Ownable {
 
     function emergencyWithdraw() external onlyOwner {
         payable(_msgSender()).transfer(address(this).balance);
-    }
-
-
-    function changefloorPrice(uint _floorPrice) external onlyOwner {
-        floorPrice = _floorPrice;
-    }
-
-    function setNFTaddress(address _nft_address) external onlyOwner {
-       apaGals = APAGAls(payable(_nft_address));
     }
 
 
