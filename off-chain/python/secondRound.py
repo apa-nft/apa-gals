@@ -3,7 +3,7 @@ import json
 
 
 def get_holder_list():
-    with open('lucky10000Holders.json', 'r') as holdersList:
+    with open('../lucky10000Holders13979378.json', 'r') as holdersList:
         return json.load(holdersList)
 
 
@@ -24,7 +24,7 @@ def generate_merkle_tree_list(winner_dict: dict):
     for holder in winner_dict:
         temp = {'address': holder, 'totalGiven': 1}
         winner_list.append(temp)
-    winner_list.append({'address': '0xxxxasdsadasd', 'totalGiven': 300})  # TODO ADD the new contract addy
+    winner_list.append({'address': '0x553beE42d9F308Aa6DB5C7dF53bDab8d649EAD00', 'totalGiven': 300}) 
     with open('newLotteryWinners.json', 'w') as winnerFile:
         json.dump(winner_list, winnerFile)
     # test
@@ -73,6 +73,6 @@ def get_new_winners(a: str, holders_list: list, previous_winners: dict):
     return new_winners
 
 
-get_winners("e7d4121809581e023b99b16e2326b040f10c26cc7781a523af6e9e211229de922c42")
+get_winners("d594213223d600522465adc8cb907699daeaa77ea1a3845254ae1bde9d34e3c2")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
