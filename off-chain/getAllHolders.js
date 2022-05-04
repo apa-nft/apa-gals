@@ -33,7 +33,7 @@ async function getHolders(start, target, apaMansionList){
 async function getHoldersAtAGivenBlock(start, target){
   mylist = []
   for (let i = start; i < target; i++) {
-      const result = await apaContract.ownerOf(i ,{ blockTag: 13373289 })
+      const result = await apaContract.ownerOf(i ,{ blockTag: 13979378 })
       if (result == "0x770a4C7f875fb63013a6Db43fF6AF9980fcEb3b8"){
         continue;
       }
@@ -41,7 +41,7 @@ async function getHoldersAtAGivenBlock(start, target){
       mylist.push(result);
   }
   var json = JSON.stringify(mylist);
-  fs.writeFileSync('lucky10000Holders.json', json)
+  fs.writeFileSync('lucky10000Holders13979378.json', json)
   return mylist  
 }
 
